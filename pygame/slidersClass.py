@@ -30,32 +30,36 @@ class Slider:
     def get_value(self):
          return self.max_value - ((self.slider_button.centery - self.y) // 3)
 
-pygame.init()
+def main():
+    pygame.init()
 
-screen = pygame.display.set_mode((600, 600))
-pygame.display.set_caption("Sliders")
-clock = pygame.time.Clock()
-font = pygame.font.Font(None, 50)
+    screen = pygame.display.set_mode((600, 600))
+    pygame.display.set_caption("Sliders")
+    clock = pygame.time.Clock()
+    font = pygame.font.Font(None, 50)
 
-slider = Slider(100, 100, 100)
+    slider = Slider(100, 100, 100)
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
 
-    screen.fill((50, 50, 50))
-    
-    slider.update()
-    mouse = pygame.mouse.get_pressed()
-    mouse_pos = pygame.mouse.get_pos()
-    text = font.render(f"Value: {slider.value}", True, "white")
-    text_rect = text.get_rect(topleft = (300, 10))
-    screen.blit(text, text_rect)
+        screen.fill((50, 50, 50))
+        
+        slider.update()
+        mouse = pygame.mouse.get_pressed()
+        mouse_pos = pygame.mouse.get_pos()
+        text = font.render(f"Value: {slider.value}", True, "white")
+        text_rect = text.get_rect(topleft = (300, 10))
+        screen.blit(text, text_rect)
 
-    slider.detect(mouse_pos[0], mouse_pos[1], mouse)
-    slider.draw(screen)
+        slider.detect(mouse_pos[0], mouse_pos[1], mouse)
+        slider.draw(screen)
 
-    pygame.display.update()
-    clock.tick(60)
+        pygame.display.update()
+        clock.tick(60)
+
+if __name__ == "__main__":
+    main()

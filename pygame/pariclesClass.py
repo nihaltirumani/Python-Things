@@ -6,7 +6,7 @@ class Particle:
     def __init__(self):
         self.particles = []
 
-    def emit(self):
+    def emit(self, screen):
         if self.particles:
             self.delete_particles() 
             for particle in self.particles:
@@ -30,28 +30,32 @@ class Particle:
         particle_copy = [particle for particle in self.particles if particle[1] < 790]
         self.particles = particle_copy
 
-pygame.init()
+def main():
+    pygame.init()
 
-screen = pygame.display.set_mode((800, 800))
-pygame.display.set_caption("Particles")
-clock = pygame.time.Clock()
+    screen = pygame.display.set_mode((800, 800))
+    pygame.display.set_caption("Particles")
+    clock = pygame.time.Clock()
 
-particle1 = Particle()
+    particle1 = Particle()
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
 
 
-    screen.fill((240, 240, 240))
+        screen.fill((240, 240, 240))
 
-    if pygame.mouse.get_pressed()[0]:
-        for i in range(1):
-            particle1.create_particles(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
+        if pygame.mouse.get_pressed()[0]:
+            for i in range(1):
+                particle1.create_particles(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
 
-    particle1.emit()
-    
-    pygame.display.update()
-    clock.tick(60)
+        particle1.emit(screen)
+        
+        pygame.display.update()
+        clock.tick(60)
+
+if __name__ == "__main__" :
+    main()

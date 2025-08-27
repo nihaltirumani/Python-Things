@@ -23,23 +23,27 @@ class Laser():
 
         screen.blit(self.trans_surf, (0, 0))
 
-pygame.init()
+def main():
+    pygame.init()
 
-screen = pygame.display.set_mode((600, 600))
-pygame.display.set_caption("Lasers")
-clock = pygame.time.Clock()
+    screen = pygame.display.set_mode((600, 600))
+    pygame.display.set_caption("Lasers")
+    clock = pygame.time.Clock()
 
-laser1 = Laser((255, 0, 0, 255), (0,0), (600, 600), 1, screen)
+    laser1 = Laser((255, 0, 0, 255), (0,0), (600, 600), 1, screen)
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-    
-    screen.fill((230, 230, 230))
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+        
+        screen.fill((230, 230, 230))
 
-    laser1.draw(screen)
+        laser1.draw(screen)
 
-    pygame.display.update()
-    clock.tick(60)
+        pygame.display.update()
+        clock.tick(60)
+
+if __name__ == "__main__":
+    main()
