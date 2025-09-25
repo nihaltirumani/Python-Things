@@ -1,10 +1,15 @@
-import random, time
-from colorama import Fore, Back, init, Style
+from math import sin, degrees
+from random import choice
+from time import sleep
+from colorama import Fore, Style, Back
 
-fore_colors = [Fore.RED, Fore.GREEN, Fore.BLUE, Fore.YELLOW, Fore.MAGENTA, Fore.CYAN, Fore.WHITE, Fore.BLACK]
-back_colors = [Back.RED, Back.GREEN, Back.BLUE, Back.YELLOW, Back.MAGENTA, Back.CYAN, Back.WHITE, Back.BLACK]
+x=0
 
-print(Style.BRIGHT+"START!!!***")
 while True:
-    print(Style.BRIGHT + random.choice(fore_colors) +( "*" * random.randint(10,45)))
-    time.sleep(random.random() * 0.13)
+    if x % 2 ==0.00:
+        fore = choice([Fore.RED, Fore.GREEN, Fore.BLUE, Fore.YELLOW, Fore.MAGENTA, Fore.CYAN, Fore.WHITE, Fore.BLACK])
+
+    x += 0.01
+    
+    print(Style.BRIGHT + fore + Back.LIGHTWHITE_EX + "█" * abs(int(degrees(sin(x)))))
+    sleep(0.01)
