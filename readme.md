@@ -1,4 +1,4 @@
-# 🐍 pythonThings
+# 🐍 Python-Things
 
 Welcome to **pythonThings**, a personal collection of Python projects created during my learning journey. This repository includes a mix of beginner-friendly scripts, small projects, and experiments using popular Python libraries like `pygame` and `tkinter`. All files are written in plain `.py` format for easy readability and execution.
 
