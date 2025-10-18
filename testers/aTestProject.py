@@ -1,40 +1,64 @@
-import pygame, math
+import pygame
 from sys import exit
+from random import randint
 
-pygame.init()
+class Particle:
+    def __init__(self):
+        self.particles = []
 
-screen = pygame.display.set_mode((800, 800))
-pygame.display.set_caption("Base code")
-clock = pygame.time.Clock()
+    def emit(self, screen):
+        if self.particles:
+            self.delete_particles() 
+            for particle in self.particles:
+                particle[3] += 1
+                particle[1] += particle[3]
+                particle[3] *= 0.98
+                particle[0] += particle[2]
+                particle[5].x = particle[0]
+                particle[5].y = particle[1]
+                screen.blit(particle[4], particle[5])
 
-obj = pygame.image.load("testers/extension_icon.png").convert_alpha()
-obj1 = pygame.transform.rotozoom(obj, 0, 0.25)
-obj1_rect = obj1.get_rect(center = (400, 400))
+    def create_particles(self, xpos, ypos):
+        x = xpos
+        y = ypos
+        speedx = randint(-10, 10)
+        speedy = randint(-18, -5)
+        obj_real = pygame.image.load("testers/extension_icon.png").convert_alpha()
+        obj = pygame.transform.rotozoom(obj_real, 0, 0.125)
+        obj_rect = obj.get_rect(center=(x, y))
+        particle = [x, y, speedx, speedy, obj, obj_rect]
+        self.particles.append(particle)
 
-dir = math.radians(1)
-speed = 5
+    def delete_particles(self):
+        particle_copy = [particle for particle in self.particles if particle[1] < 790]
+        self.particles = particle_copy
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
+def main():
+    pygame.init()
 
-    screen.fill((50,50,50))
+    screen = pygame.display.set_mode((800, 800))
+    pygame.display.set_caption("Particles")
+    clock = pygame.time.Clock()
 
-    # mousex = pygame.mouse.get_pos()[0]
-    # mousey = pygame.mouse.get_pos()[1]
-    # dir = (math.atan2(-(mousey - obj1_rect.centery), mousex - obj1_rect.centerx))
+    particle1 = Particle()
 
-    if obj1_rect.right >= 800 or obj1_rect.left <= 0:
-        dir = math.pi - dir
-    if obj1_rect.top <= 0 or obj1_rect.bottom >= 800:
-        dir = -dir
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
 
-    obj1_rect.centerx += speed * math.cos(dir)
-    obj1_rect.centery += -speed * math.sin(dir)
 
-    screen.blit(obj1, obj1_rect)
+        screen.fill((240, 240, 240))
 
-    pygame.display.update()
-    clock.tick(120)
+        if pygame.mouse.get_pressed()[0]:
+            for i in range(1):
+                particle1.create_particles(pygame.mouse.get_pos()[0] - 32, pygame.mouse.get_pos()[1] - 32)
+
+        particle1.emit(screen)
+        
+        pygame.display.update()
+        clock.tick(60)
+
+if __name__ == "__main__" :
+    main()
