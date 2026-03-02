@@ -1,3 +1,0 @@
-import aTestProject
-
-aTestProject.main()
