@@ -1,0 +1,14 @@
+vehicle_type = int(input("What is the vehicle type? \n1. New\n2. Used\n"))
+principle = int(input("Principle amount: "))
+term = int(input("Term: "))
+interest = 0
+
+if vehicle_type == 1:
+    interest = term
+elif vehicle_type == 2:
+    interest = term + 6
+
+amount = principle * ((100 + interest) / 100)
+EMI = amount / term
+
+print(f"EMI: {EMI}")
